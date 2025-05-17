@@ -1,3 +1,20 @@
+import Lenis from 'lenis'
+import 'lenis/dist/lenis.css'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+// export const initSmoothScroll = () => {
+const lenis = new Lenis()
+
+lenis.on('scroll', ScrollTrigger.update)
+
+gsap.ticker.add((time) => {
+    lenis.raf(time * 1000)
+})
+
+gsap.ticker.lagSmoothing(0)
+// }
+
 if (import.meta.env.MODE === 'development') {
     // Dynamically import the grid-helper only in development mode
     import('@locomotivemtl/grid-helper')
@@ -5,7 +22,7 @@ if (import.meta.env.MODE === 'development') {
             new GridHelper({
                 columns: 12,
                 gutterWidth: '10px',
-                marginWidth: '0px',
+                marginWidth: '10px',
                 // columns: 'var(--grid-columns)',
                 // gutterWidth: `var(--spacing-gutter)`,
                 // marginWidth: `var(--spacing-gutter)`,
