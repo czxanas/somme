@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/vercel": "^8.1.4",
     "@locomotivemtl/grid-helper": "^1.0.0",
     "astro": "^5.7.13",
     "gsap": "3.13.0",
