@@ -8,6 +8,9 @@ dependencies:
   astro:
     specifier: ^5.7.13
     version: 5.7.13(typescript@5.8.3)
+  gsap:
+    specifier: 3.13.0
+    version: 3.13.0
 
 packages:
 
@@ -1331,6 +1334,10 @@ packages:
 
   /github-slugger@2.0.0:
     resolution: {integrity: sha512-IaOQ9puYtjrkq7Y0Ygl9KDZnrf/aiUJYUpVf89y8kyaxbRG7Y1SrX/jaumrv81vc61+kiMempujsM3Yw7w5qcw==}
+    dev: false
+
+  /gsap@3.13.0:
+    resolution: {integrity: sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==}
     dev: false
 
   /h3@1.15.3:
