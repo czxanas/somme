@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@locomotivemtl/grid-helper':
+    specifier: ^1.0.0
+    version: 1.0.0
   astro:
     specifier: ^5.7.13
     version: 5.7.13(typescript@5.8.3)
@@ -721,6 +724,11 @@ packages:
 
   /@jridgewell/sourcemap-codec@1.5.0:
     resolution: {integrity: sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==}
+    dev: false
+
+  /@locomotivemtl/grid-helper@1.0.0:
+    resolution: {integrity: sha512-/HkUBf2qR2cfZ9vzyYvLWO532tPy29qoBXbwbJ8dxkI+FucZMu8yjiYWnjy+fRqYpu1PJ18ojLiIyLOhtfdRFw==}
+    engines: {node: '>=20'}
     dev: false
 
   /@oslojs/encoding@1.1.0:
