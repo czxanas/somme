@@ -1,5 +1,22 @@
 ---
 import '../styles/main.css';
+import { SEO } from 'astro-seo';
+import { defaultSeo } from '../data/seo';
+import { getSeo } from '../utils/seo';
+
+interface Props {
+    title: string;
+    seo?: Seo;
+}
+
+const { title, seo = {} } = Astro.props;
+
+const seoData = getSeo(seo, defaultSeo, title);
+
+const FONTS: string[] = [
+    // 'WebfontRegular.woff2',
+    // 'WebfontBold.woff2',
+];
 ---
 
 <!doctype html>
@@ -9,7 +26,22 @@ import '../styles/main.css';
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
-        <title>Astro Basics</title>
+
+        <SEO {...seoData} />
+
+        <!-- Fonts -->
+        {
+            FONTS.map((font) => (
+                <link
+                    rel="preload"
+                    href={`/fonts/${font}`}
+                    as="font"
+                    type="font/woff2"
+                    crossorigin
+                />
+            ))
+        }
+        <!--/ FONTS -->
     </head>
     <body>
         <main
