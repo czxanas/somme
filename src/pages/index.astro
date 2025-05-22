@@ -1,8 +1,34 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const seo = {
+    // title: 'Astro Boilerplate - Home',
+    // description: 'A minimal and powerful Astro boilerplate for fast web development.',
+    // social: {
+    //     facebook: {
+    //         title: 'Astro Boilerplate - Facebook',
+    //         description: 'A minimal starter built with Astro. Fast, clean and scalable.',
+    //         image: {
+    //             url: '/cover-home.jpg' // You can change this path if you have a different image
+    //         }
+    //     },
+    //     twitter: {
+    //         creator: '@anas_dev',
+    //         title: 'Astro Boilerplate - Twitter',
+    //         description: 'Start fast with this clean Astro boilerplate.',
+    //         image: {
+    //             url: '/cover-home.jpg'
+    //         }
+    //     }
+    // },
+    // advanced: {
+    //     robots: ['index', 'follow'],
+    //     canonical: 'https://yourdomain.com/' // replace with your real domain
+    // }
+};
 ---
 
-<Layout title='Home'>
+<Layout title="Home" seo={seo}>
     <section class="w-full h-full flex items-center justify-center bg-white">
         <div class="container max-w-xl bg-transparent text-black">
             <h1 class="text-6xl mb-5">Boilerplate</h1>
