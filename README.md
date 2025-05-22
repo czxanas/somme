@@ -13,6 +13,7 @@
 - **Image optimization** with `sharp`
 - **Vercel adapter** for deployment
 - **Prettier** with Astro plugin for formatting
+- **Astro's SEO intergration** for SEO handling
 
 ## 📁 Project Structure
 
