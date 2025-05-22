@@ -21,7 +21,7 @@ export const defaultSeo: Seo = {
         }
     },
     advanced: {
-        robots: ['noindex', 'nofollow'],
+        // robots: ['noindex', 'nofollow'],
         // canonical: 'https://yourdomain.ca'
     }
 };
