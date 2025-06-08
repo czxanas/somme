@@ -6,14 +6,14 @@ settings:
 
 dependencies:
   '@astrojs/vercel':
-    specifier: ^8.1.4
-    version: 8.1.4(astro@5.7.13)
+    specifier: ^8.1.5
+    version: 8.1.5(astro@5.9.1)
   '@locomotivemtl/grid-helper':
     specifier: ^1.0.0
     version: 1.0.0
   astro:
-    specifier: ^5.7.13
-    version: 5.7.13(typescript@5.8.3)
+    specifier: ^5.9.1
+    version: 5.9.1(typescript@5.8.3)
   astro-seo:
     specifier: ^0.8.4
     version: 0.8.4(prettier-plugin-astro@0.14.1)(prettier@3.5.3)(typescript@5.8.3)
@@ -71,6 +71,10 @@ packages:
   /@astrojs/compiler@2.12.0:
     resolution: {integrity: sha512-7bCjW6tVDpUurQLeKBUN9tZ5kSv5qYrGmcn0sG0IwacL7isR2ZbyyA3AdZ4uxsuUFOS2SlgReTH7wkxO6zpqWA==}
 
+  /@astrojs/compiler@2.12.1:
+    resolution: {integrity: sha512-WDSyVIiz7sNcJcCJxJFITu6XjfGhJ50Z0auyaWsrM+xb07IlhBLFtQuDkNy0caVHWNcKTM2LISAaHhgkRqGAVg==}
+    dev: false
+
   /@astrojs/internal-helpers@0.6.1:
     resolution: {integrity: sha512-l5Pqf6uZu31aG+3Lv8nl/3s4DbUzdlxTWDof4pEpto6GUJNhhCbelVi9dEyurOVyqaelwmS9oSyOWOENSfgo9A==}
     dev: false
@@ -111,11 +115,11 @@ packages:
       - typescript
     dev: false
 
-  /@astrojs/markdown-remark@6.3.1:
-    resolution: {integrity: sha512-c5F5gGrkczUaTVgmMW9g1YMJGzOtRvjjhw6IfGuxarM6ct09MpwysP10US729dy07gg8y+ofVifezvP3BNsWZg==}
+  /@astrojs/markdown-remark@6.3.2:
+    resolution: {integrity: sha512-bO35JbWpVvyKRl7cmSJD822e8YA8ThR/YbUsciWNA7yTcqpIAL2hJDToWP5KcZBWxGT6IOdOkHSXARSNZc4l/Q==}
     dependencies:
       '@astrojs/internal-helpers': 0.6.1
-      '@astrojs/prism': 3.2.0
+      '@astrojs/prism': 3.3.0
       github-slugger: 2.0.0
       hast-util-from-html: 2.0.3
       hast-util-to-text: 4.0.2
@@ -139,16 +143,16 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/prism@3.2.0:
-    resolution: {integrity: sha512-GilTHKGCW6HMq7y3BUv9Ac7GMe/MO9gi9GW62GzKtth0SwukCu/qp2wLiGpEujhY+VVhaG9v7kv/5vFzvf4NYw==}
-    engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0}
+  /@astrojs/prism@3.3.0:
+    resolution: {integrity: sha512-q8VwfU/fDZNoDOf+r7jUnMC2//H2l0TuQ6FkGJL8vD8nw/q5KiL3DS1KKBI3QhI9UQhpJ5dc7AtqfbXWuOgLCQ==}
+    engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0}
     dependencies:
       prismjs: 1.30.0
     dev: false
 
-  /@astrojs/telemetry@3.2.1:
-    resolution: {integrity: sha512-SSVM820Jqc6wjsn7qYfV9qfeQvePtVc1nSofhyap7l0/iakUKywj3hfy3UJAOV4sGV4Q/u450RD4AaCaFvNPlg==}
-    engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0}
+  /@astrojs/telemetry@3.3.0:
+    resolution: {integrity: sha512-UFBgfeldP06qu6khs/yY+q1cDAaArM2/7AEIqQ9Cuvf7B1hNLq0xDrZkct+QoIGyjq56y8IaE2I3CTvG99mlhQ==}
+    engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0}
     dependencies:
       ci-info: 4.2.0
       debug: 4.4.1
@@ -161,8 +165,8 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/vercel@8.1.4(astro@5.7.13):
-    resolution: {integrity: sha512-mJAbaXwLBVsk+5JNwzKIrpvIQ4llW/gS9ut5Rot5x6D+9DYSqfZ6PRIT0YvyzgUackahYAQdH/MZWeqVrcmwuA==}
+  /@astrojs/vercel@8.1.5(astro@5.9.1):
+    resolution: {integrity: sha512-3FX8Pe/mzbvUfBJi+73aOrXp5L0s9IkNH5WlexHkzJHUvnkr5PqOB6h4Yya5owmmCDhKzH79YZ+ga0Xwz0MxXQ==}
     peerDependencies:
       astro: ^5.0.0
     dependencies:
@@ -171,7 +175,7 @@ packages:
       '@vercel/edge': 1.2.1
       '@vercel/nft': 0.29.3
       '@vercel/routing-utils': 5.0.4
-      astro: 5.7.13(typescript@5.8.3)
+      astro: 5.9.1(typescript@5.8.3)
       esbuild: 0.25.4
       tinyglobby: 0.2.13
     transitivePeerDependencies:
@@ -1389,6 +1393,7 @@ packages:
 
   /@vercel/edge@1.2.1:
     resolution: {integrity: sha512-1++yncEyIAi68D3UEOlytYb1IUcIulMWdoSzX2h9LuSeeyR7JtaIgR8DcTQ6+DmYOQn+5MCh6LY+UmK6QBByNA==}
+    deprecated: This package is deprecated. You should to use `@vercel/functions` instead.
     dev: false
 
   /@vercel/nft@0.29.3:
@@ -1594,15 +1599,15 @@ packages:
       - typescript
     dev: false
 
-  /astro@5.7.13(typescript@5.8.3):
-    resolution: {integrity: sha512-cRGq2llKOhV3XMcYwQpfBIUcssN6HEK5CRbcMxAfd9OcFhvWE7KUy50zLioAZVVl3AqgUTJoNTlmZfD2eG0G1w==}
-    engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
+  /astro@5.9.1(typescript@5.8.3):
+    resolution: {integrity: sha512-wxoJcTbuDZNFSv6EaL0PAlrp0Wx6VnOAULCXvy0scsV70oWMeUkdxuBxfO54JxO5Qgyvwj9h99y6E0elqOpGtA==}
+    engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
     dependencies:
-      '@astrojs/compiler': 2.12.0
+      '@astrojs/compiler': 2.12.1
       '@astrojs/internal-helpers': 0.6.1
-      '@astrojs/markdown-remark': 6.3.1
-      '@astrojs/telemetry': 3.2.1
+      '@astrojs/markdown-remark': 6.3.2
+      '@astrojs/telemetry': 3.3.0
       '@capsizecss/unpack': 2.4.0
       '@oslojs/encoding': 1.1.0
       '@rollup/pluginutils': 5.1.4
@@ -1629,6 +1634,7 @@ packages:
       github-slugger: 2.0.0
       html-escaper: 3.0.3
       http-cache-semantics: 4.2.0
+      import-meta-resolve: 4.1.0
       js-yaml: 4.1.0
       kleur: 4.1.5
       magic-string: 0.30.17
