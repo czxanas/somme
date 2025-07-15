@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Plus from '../assets/svg/plus.astro';
+import Return from '../assets/svg/return.astro';
 
 const seo = {
     // title: 'Astro Boilerplate - Home',
@@ -26,72 +28,175 @@ const seo = {
     //     canonical: 'https://yourdomain.com/' // replace with your real domain
     // }
 };
-
-const images = [
-    { src: '/images/darkone.webp', rotate: 8 },
-    { src: '/images/orangeone.webp', rotate: 8 },
-    { src: '/images/softone.webp', rotate: 4 },
-    { src: '/images/gifone.gif', rotate: 0 }
-];
 ---
 
 <Layout title="Home" seo={seo}>
-    <section class="container max-w-lg">
-        <div class="mt-20"></div>
-        <!--  -->
-        <div class="relative w-full aspect-10/4 bg-black rounded-3xl">
-            <div
-                class="absolute bottom-0 translate-y-1/2 translate-x-3/10 w-30 aspect-square rounded-full bg-black border-4 border-white"
+    <section
+        class="container max-w-lg min-h-[100dvh] flex flex-col items-center justify-center gap-2"
+    >
+        <input
+            id="number"
+            type="number"
+            class="w-full text-2xl font-semibold border-4 border-black px-6 h-18 rounded-full focus:outline-0 focus:border-zinc-500 shadow-lg"
+        />
+        <div class="w-full grid grid-cols-2 gap-1">
+            <button
+                id="return"
+                type="button"
+                class="w-full h-18 border-4 border-zinc-700 px-2 py-2 left-rounded bg-red-500 focus:outline-0 focus:border-zinc-500 cursor-pointer shadow-lg"
             >
-                <div
-                    class="absolute bottom-0 right-0 w-8 aspect-square rounded-full bg-orange-500 border-2 border-white"
-                >
-                </div>
-            </div>
+                <div class="w-fit mx-auto pointer-events-none"><Return /></div>
+            </button>
+            <button
+                id="plus"
+                type="button"
+                class="w-full h-18 border-4 border-zinc-700 px-2 py-2 right-rounded bg-blue-500 focus:outline-0 focus:border-zinc-500 cursor-pointer shadow-lg"
+            >
+                <div class="w-fit mx-auto pointer-events-none"><Plus /></div>
+            </button>
         </div>
-        <!--  -->
-        <div class="mt-30"></div>
-        <!--  -->
-        <section class="flex flex-col gap-4">
-            <div class="font-semibold">Story</div>
-            <p class="flex flex-col gap-2 text-black/60">
-                <span
-                    >I've always been that curious, creative kid. At 10, I was drawing for fun and
-                    even selling my sketches to friends at school.</span
-                >
-                <span
-                    >That love for making things never stopped. In 2019, I stumbled into code, and
-                    something just clicked. It felt right, like I'd finally found my place.</span
-                >
-                <span
-                    >Today, I craft human-centered digital experiences that are smooth, interactive,
-                    and made to connect with people in meaningful ways.</span
-                >
-                <span>Still that same kid, just with pixels instead of pencils.</span>
-            </p>
-        </section>
-        <!--  -->
-        <div class="mt-10"></div>
-        <!--  -->
-        <section class="flex flex-col gap-4">
-            <div class="font-semibold">Now</div>
-            <p class="flex flex-col gap-2 text-black/60">
-                <span
-                    >Right now, I'm learning more about code and design to push my frontend work
-                    even further.</span
-                >
-                <span
-                    >I'm always experimenting, testing animations, building new features, and
-                    staying curious.</span
-                >
-                <span
-                    >The job title I love using is: <span
-                        class="text-black border border-black/50 rounded py-0.25 px-1"
-                        >UX Engineer</span
-                    >. Open to opportunities, collaborations, or just a good conversation.</span
-                >
-            </p>
-        </section>
-        <!--  -->
-        <div class="mt-16"></div>
+    </section>
+
+    <section id="total" class="fixed w-fit h-fit top-0 left-0 pt-5 pl-5 font-semibold text-xl">
+        0<!-- 1000.00 -->
+    </section>
+
+    <section id="numbers" class="fixed w-fit h-screen top-0 right-0 pt-5 pr-5 overflow-y-scroll">
+        <ul class="w-fit h-fit flex flex-col items-end">
+            <!-- <li></li> -->
+        </ul>
+    </section>
 </Layout>
+
+<script>
+    import gsap from 'gsap';
+
+    if (typeof window !== 'undefined') {
+        window.addEventListener('DOMContentLoaded', () => {
+            const input = document.getElementById('number') as HTMLInputElement;
+            const plusBtn = document.getElementById('plus') as HTMLElement;
+            const returnBtn = document.getElementById('return') as HTMLElement;
+            const totalDisplay = document.getElementById('total') as HTMLElement;
+            const numbersContainer = document.querySelector('#numbers ul') as HTMLElement;
+
+            let total = 0;
+
+            // === Animations for Plus & Return Buttons ===
+            const animateBtn = (btn: any) => {
+                const tl = gsap.timeline({ paused: true, reversed: true });
+                tl.to(btn, {
+                    scale: 0.95,
+                    duration: 0.15,
+                    ease: 'power2.out'
+                });
+
+                btn.addEventListener('mousedown', () => tl.play());
+                btn.addEventListener('mouseup', () => tl.reverse());
+                btn.addEventListener('mouseleave', () => {
+                    if (!tl.reversed()) tl.reverse();
+                });
+            };
+
+            animateBtn(plusBtn);
+            animateBtn(returnBtn);
+
+            // === PLUS logic ===
+            plusBtn.addEventListener('click', () => {
+                const value = parseFloat(input.value);
+                if (isNaN(value)) return;
+
+                // Add to total
+                total += value;
+                totalDisplay.textContent = total.toFixed(2);
+
+                // Add new <li>
+                const li = document.createElement('li');
+                li.textContent = value.toFixed(2);
+                li.className = 'text-right';
+                numbersContainer.appendChild(li);
+
+                // Clear input
+                input.value = '';
+            });
+
+            // === RETURN logic ===
+            returnBtn.addEventListener('click', () => {
+                const last = numbersContainer.lastElementChild as any;
+                if (!last) return;
+
+                const value = parseFloat(last.textContent);
+                if (isNaN(value)) return;
+
+                // Subtract from total
+                total -= value;
+                totalDisplay.textContent = total.toFixed(2);
+
+                // Remove the last <li>
+                numbersContainer.removeChild(last);
+            });
+        });
+    }
+</script>
+
+<!-- <script>
+    import gsap from 'gsap';
+    // Wait for DOM to load
+    if (typeof window !== 'undefined') {
+        window.addEventListener('DOMContentLoaded', () => {
+            const plusBtn = document.getElementById('plus') as HTMLButtonElement;
+
+            // Define the timeline once
+            const tl = gsap.timeline({
+                paused: true,
+                reversed: true,
+                onComplete: () => {
+                    tl.kill();
+                }
+            });
+
+            tl.to(plusBtn, {
+                scale: 0.95,
+                duration: 0.1,
+                ease: 'power2.out'
+            });
+
+            // Play on press
+            plusBtn.addEventListener('mousedown', () => {
+                tl.play();
+            });
+
+            // Reverse on release
+            plusBtn.addEventListener('mouseup', () => {
+                tl.reverse();
+            });
+
+            // Also handle mouseleave for better UX
+            plusBtn.addEventListener('mouseleave', () => {
+                if (!tl.reversed()) tl.reverse();
+            });
+
+            // Optional: for accessibility, support keyboard press
+            plusBtn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') tl.play();
+            });
+            plusBtn.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') tl.reverse();
+            });
+        });
+    }
+</script> -->
+
+<style>
+    .left-rounded {
+        border-top-left-radius: 50rem;
+        border-bottom-left-radius: 50rem;
+        border-top-right-radius: 20rem;
+        border-bottom-right-radius: 20rem;
+    }
+    .right-rounded {
+        border-top-right-radius: 50rem;
+        border-bottom-right-radius: 50rem;
+        border-top-left-radius: 20rem;
+        border-bottom-left-radius: 20rem;
+    }
+</style>
