@@ -61,9 +61,11 @@ const seo = {
         0<!-- 1000.00 -->
     </section>
 
-    <section id="numbers" class="fixed w-fit h-[30vh] top-0 right-0 p-5 overflow-y-scroll rounded-xl bg-white">
-        <ul class="w-fit h-fit flex flex-col items-end">
-        </ul>
+    <section
+        id="numbers"
+        class="fixed w-fit h-[30vh] top-0 right-0 p-5 overflow-y-scroll rounded-xl bg-white"
+    >
+        <ul class="w-fit h-fit flex flex-col items-end"></ul>
     </section>
 </Layout>
 
@@ -89,11 +91,17 @@ const seo = {
                     ease: 'power2.out'
                 });
 
+                // Desktop
                 btn.addEventListener('mousedown', () => tl.play());
                 btn.addEventListener('mouseup', () => tl.reverse());
                 btn.addEventListener('mouseleave', () => {
                     if (!tl.reversed()) tl.reverse();
                 });
+
+                // Mobile (touch)
+                btn.addEventListener('touchstart', () => tl.play(), { passive: true });
+                btn.addEventListener('touchend', () => tl.reverse());
+                btn.addEventListener('touchcancel', () => tl.reverse());
             };
 
             animateBtn(plusBtn);
