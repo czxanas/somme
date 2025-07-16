@@ -80,9 +80,33 @@ const seo = {
             const totalDisplay = document.getElementById('total') as HTMLElement;
             const numbersContainer = document.querySelector('#numbers ul') as HTMLElement;
 
-            let total = 0;
+            // LocalStorage key
+            const STORAGE_KEY = 'numberList';
 
-            // === Animations for Plus & Return Buttons ===
+            // Load from localStorage or initialize
+            let numbers = JSON.parse(localStorage.getItem(STORAGE_KEY) as any) || [];
+
+            // === Helpers ===
+            const saveToStorage = () => {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(numbers));
+            };
+
+            const renderList = () => {
+                numbersContainer.innerHTML = '';
+                numbers.forEach((num: any) => {
+                    const li = document.createElement('li');
+                    li.textContent = num.toFixed(2);
+                    li.className = 'text-right';
+                    numbersContainer.appendChild(li);
+                });
+            };
+
+            const updateTotal = () => {
+                const total = numbers.reduce((acc: any, n: any) => acc + n, 0);
+                totalDisplay.textContent = total.toFixed(2);
+            };
+
+            // === Animations ===
             const animateBtn = (btn: any) => {
                 const tl = gsap.timeline({ paused: true, reversed: true });
                 tl.to(btn, {
@@ -90,15 +114,11 @@ const seo = {
                     duration: 0.15,
                     ease: 'power2.out'
                 });
-
-                // Desktop
                 btn.addEventListener('mousedown', () => tl.play());
                 btn.addEventListener('mouseup', () => tl.reverse());
                 btn.addEventListener('mouseleave', () => {
                     if (!tl.reversed()) tl.reverse();
                 });
-
-                // Mobile (touch)
                 btn.addEventListener('touchstart', () => tl.play(), { passive: true });
                 btn.addEventListener('touchend', () => tl.reverse());
                 btn.addEventListener('touchcancel', () => tl.reverse());
@@ -107,91 +127,34 @@ const seo = {
             animateBtn(plusBtn);
             animateBtn(returnBtn);
 
-            // === PLUS logic ===
+            // === Initial render ===
+            renderList();
+            updateTotal();
+
+            // === PLUS ===
             plusBtn.addEventListener('click', () => {
                 const value = parseFloat(input.value);
                 if (isNaN(value)) return;
 
-                // Add to total
-                total += value;
-                totalDisplay.textContent = total.toFixed(2);
-
-                // Add new <li>
-                const li = document.createElement('li');
-                li.textContent = value.toFixed(2);
-                li.className = 'text-right';
-                numbersContainer.appendChild(li);
-
-                // Clear input
+                numbers.push(value);
+                saveToStorage();
+                renderList();
+                updateTotal();
                 input.value = '';
             });
 
-            // === RETURN logic ===
+            // === RETURN ===
             returnBtn.addEventListener('click', () => {
-                const last = numbersContainer.lastElementChild as any;
-                if (!last) return;
+                if (numbers.length === 0) return;
 
-                const value = parseFloat(last.textContent);
-                if (isNaN(value)) return;
-
-                // Subtract from total
-                total -= value;
-                totalDisplay.textContent = total.toFixed(2);
-
-                // Remove the last <li>
-                numbersContainer.removeChild(last);
+                numbers.pop();
+                saveToStorage();
+                renderList();
+                updateTotal();
             });
         });
     }
 </script>
-
-<!-- <script>
-    import gsap from 'gsap';
-    // Wait for DOM to load
-    if (typeof window !== 'undefined') {
-        window.addEventListener('DOMContentLoaded', () => {
-            const plusBtn = document.getElementById('plus') as HTMLButtonElement;
-
-            // Define the timeline once
-            const tl = gsap.timeline({
-                paused: true,
-                reversed: true,
-                onComplete: () => {
-                    tl.kill();
-                }
-            });
-
-            tl.to(plusBtn, {
-                scale: 0.95,
-                duration: 0.1,
-                ease: 'power2.out'
-            });
-
-            // Play on press
-            plusBtn.addEventListener('mousedown', () => {
-                tl.play();
-            });
-
-            // Reverse on release
-            plusBtn.addEventListener('mouseup', () => {
-                tl.reverse();
-            });
-
-            // Also handle mouseleave for better UX
-            plusBtn.addEventListener('mouseleave', () => {
-                if (!tl.reversed()) tl.reverse();
-            });
-
-            // Optional: for accessibility, support keyboard press
-            plusBtn.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') tl.play();
-            });
-            plusBtn.addEventListener('keyup', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') tl.reverse();
-            });
-        });
-    }
-</script> -->
 
 <style>
     .left-rounded {
